@@ -2,29 +2,33 @@
 import React from 'react';
 
 interface Product {
-    id: number;
+    _id: string;
     name: string;
     price: number;
+    description: string;
+    imageUrl: string;
+    brand: string;
+    rating: number;
+    reviews: number;
 }
 
-const products: Product[] = [
-    { id: 1, name: 'Product A', price: 29.99 },
-    { id: 2, name: 'Product B', price: 19.99 },
-    { id: 3, name: 'Product C', price: 49.99 },
-    { id: 4, name: 'Product D', price: 39.99 },
-];
+interface ProductListProps {
+    products: Product[];
+}
 
-const ProductList: React.FC = () => {
+const ProductList: React.FC<ProductListProps> = ({ products }) => {
     return (
-        <div>
-            <h2>Product List</h2>
-            <ul>
-                {products.map((product) => (
-                    <li key={product.id}>
-                        {product.name} - ${product.price.toFixed(2)}
-                    </li>
-                ))}
-            </ul>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', padding: '20px' }}>
+            {products.map(product => (
+                <div key={product._id} style={{ border: '1px solid #ccc', borderRadius: '8px', padding: '16px', width: '200px' }}>
+                    <img src={product.imageUrl} alt={product.name} style={{ width: '100%', borderRadius: '8px' }} />
+                    <h3>{product.name}</h3>
+                    <p>Price: ${product.price.toFixed(2)}</p>
+                    <p>{product.description}</p>
+                    <p>Brand: {product.brand}</p>
+                    <p>Rating: {product.rating} ({product.reviews} reviews)</p>
+                </div>
+            ))}
         </div>
     );
 };
