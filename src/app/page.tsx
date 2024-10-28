@@ -15,7 +15,7 @@ const HomePage: React.FC = () => {
             <h1>Welcome to Our E-Commerce Site!</h1>
             <div>
                 <button onClick={() => handleRedirect('/orders')} style={{ display: 'block', marginBottom: '5px', marginTop: '10px' }}>Go to Orders</button>
-                <button onClick={() => handleRedirect('/home')} style={{ display: 'block' }}>Go to Home</button>
+                <button onClick={() => handleRedirect('/products')} style={{ display: 'block' }}>Go to Home</button>
             </div>
         </div>
     );

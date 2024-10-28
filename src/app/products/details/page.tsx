@@ -28,8 +28,11 @@ export default function Home() {
     useEffect(() => {
         fetch('http://localhost:3001/api/v1/products/details', {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
-                'id': '6703a94e13ff5eff14c0b925',
+                id: '6703a94e13ff5eff14c0b925',
             }),
         })
             .then((res) => res.json())
