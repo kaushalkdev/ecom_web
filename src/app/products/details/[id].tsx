@@ -1,5 +1,6 @@
 "use client";
 import ProductDetail from "../components/ProductDetail";
+import { useRouter } from "next/router";
 import { useState, useEffect } from 'react';
 
 interface Product {
@@ -22,8 +23,14 @@ interface ApiResponse {
 }
 
 export default function Home() {
+    const router = useRouter();
+    const { id } = router.query;
+
+    console.log("product id", id);
     const [data, setData] = useState<Product | null>(null);
     const [isLoading, setLoading] = useState(true);
+
+    if (!id) return <p>In correct Id</p>;
 
     useEffect(() => {
         fetch('http://localhost:3001/api/v1/products/details', {
@@ -32,7 +39,7 @@ export default function Home() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id: '6703a94e13ff5eff14c0b925',
+                id
             }),
         })
             .then((res) => res.json())
@@ -44,7 +51,7 @@ export default function Home() {
                 console.error("Error fetching data:", error);
                 setLoading(false);
             });
-    }, []);
+    }, [id]);
 
     if (isLoading) return <p>Loading...</p>;
     if (!data) return <p>No data Found</p>;
