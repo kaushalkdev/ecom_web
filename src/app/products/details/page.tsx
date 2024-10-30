@@ -1,6 +1,6 @@
 "use client";
 import ProductDetail from "../components/ProductDetail";
-import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from 'react';
 
 interface Product {
@@ -23,8 +23,8 @@ interface ApiResponse {
 }
 
 export default function Home() {
-    const router = useRouter();
-    const { id } = router.query;
+    const searchParams = useSearchParams()
+    const id = searchParams.get('id');
 
     console.log("product id", id);
     const [data, setData] = useState<Product | null>(null);
