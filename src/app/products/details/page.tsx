@@ -1,6 +1,7 @@
 "use client";
+import Link from "next/link";
 import ProductDetail from "../components/ProductDetail";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useState, useEffect } from 'react';
 
 interface Product {
@@ -23,12 +24,18 @@ interface ApiResponse {
 }
 
 export default function Home() {
-    const searchParams = useSearchParams()
+    const searchParams = useSearchParams();
+    const router = useRouter();
     const id = searchParams.get('id');
 
-    console.log("product id", id);
+
     const [data, setData] = useState<Product | null>(null);
     const [isLoading, setLoading] = useState(true);
+
+    const handleOnClick = () => {
+        router.push('/orders')
+        console.log("BUtton clicked");
+    }
 
     if (!id) return <p>In correct Id</p>;
 
@@ -59,6 +66,10 @@ export default function Home() {
     return (
         <div>
             <ProductDetail product={data} />
+            <div>
+                <button type="button" onClick={handleOnClick}>
+                    Buy Me</button>
+            </div>
         </div>
     );
 }
